@@ -1,0 +1,11 @@
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+test_index:
+    path: /index
+    defaults: { _controller: AppBundle:Test:index}
+
+redir:
+    path: /123
+    controller: AppBundle:Test:test
