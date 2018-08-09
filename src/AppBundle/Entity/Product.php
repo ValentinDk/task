@@ -3,95 +3,183 @@
 namespace AppBundle\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="Products")
+ */
 class Product
 {
     /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    /**
+     * @ORM\Column(type="string", unique=true)
      * @Assert\NotBlank(message="Incorrect data")
      */
     private $productCode;
 
     /**
+     * @ORM\Column(type="string")
      * @Assert\NotBlank(message="Incorrect data")
      */
     private $productName;
 
     /**
+     * @ORM\Column(type="string")
      * @Assert\NotBlank(message="Incorrect data")
      */
     private $productDescription;
 
     /**
+     * @ORM\Column(name="Added", type="datetime", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+     * @ORM\Version
+     */
+    private $added;
+
+    /**
+     * @ORM\Column(type="integer")
      * @Assert\Type(type="integer", message="Incorrect data")
      */
     private $stock;
 
     /**
+     * @ORM\Column(type="float")
      * @Assert\Type(type="float", message="Incorrect data")
      */
     private $costInUSA;
 
     /**
-     * @var
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $discontinued;
 
-    public function getProductCode()
+    /**
+     * @ORM\Column(type="datetime", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+     * @ORM\Version
+     */
+    private $timestamp;
+
+    /**
+     * @return int
+     */
+    public function getProductId():int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProductCode():string
     {
         return $this->productCode;
     }
 
-    public function getProductName()
+    /**
+     * @return string
+     */
+    public function getProductName():string
     {
         return $this->productName;
     }
 
-    public function getProductDescription()
+    /**
+     * @return string
+     */
+    public function getProductDescription():string
     {
         return $this->productDescription;
     }
 
-    public function getStock()
+    /**
+     * @return \DateTime
+     */
+    public function getAdded():\DateTime
+    {
+        return $this->added;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStock():int
     {
         return $this->stock;
     }
 
-    public function getCostInUSA()
+    /**
+     * @return float
+     */
+    public function getCostInUSA():float
     {
         return $this->costInUSA;
     }
 
-    public function getDiscontinued()
+    /**
+     * @return \DateTime
+     */
+    public function getDiscontinued():\DateTime
     {
         return $this->discontinued;
     }
 
-    public function setProductCode($productCode)
+    /**
+     * @return \DateTime
+     */
+    public function getTimestamp():\DateTime
+    {
+        return $this->timestamp;
+    }
+
+    /**
+     * @param string $productCode
+     */
+    public function setProductCode(string $productCode)
     {
         $this->productCode = $productCode;
     }
 
-    public function setProductName($productName)
+    /**
+     * @param string $productName
+     */
+    public function setProductName(string $productName)
     {
         $this->productName = $productName;
     }
 
-    public function setProductDescription($productDescription)
+    /**
+     * @param string $productDescription
+     */
+    public function setProductDescription(string $productDescription)
     {
         $this->productDescription = $productDescription;
     }
 
-    public function setStock($stock)
+    /**
+     * @param int $stock
+     */
+    public function setStock(int $stock)
     {
-        $this->stock = (integer) $stock;
+        $this->stock = $stock;
     }
 
-    public function setCostInUSA( $costInUSA)
+    /**
+     * @param float $costInUSA
+     */
+    public function setCostInUSA(float $costInUSA)
     {
-        $this->costInUSA = (float) $costInUSA;
+        $this->costInUSA = $costInUSA;
     }
 
-    public function setDiscontinued($discontinued)
+    /**
+     * @param string $discontinued
+     */
+    public function setDiscontinued(string $discontinued)
     {
         if($discontinued === "yes") {
             $this->discontinued = date('Y-m-d H:i');

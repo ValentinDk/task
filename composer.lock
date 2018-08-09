@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0180509bd40e5d43f071f525ddb02ddf",
+    "content-hash": "59acd7e5e76d8b601f4017e1dfadb0ad",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -1118,6 +1118,253 @@
             "time": "2018-07-04T16:31:37+00:00"
         },
         {
+            "name": "portphp/csv",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/portphp/csv.git",
+                "reference": "3d29b4dfbb112b6ef0eaef5ae79d04f9431c834b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/portphp/csv/zipball/3d29b4dfbb112b6ef0eaef5ae79d04f9431c834b",
+                "reference": "3d29b4dfbb112b6ef0eaef5ae79d04f9431c834b",
+                "shasum": ""
+            },
+            "require": {
+                "portphp/portphp": "^1.2.0"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "^2.1",
+                "phpunit/phpunit": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Port\\Csv\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David de Boer",
+                    "email": "david@ddeboer.nl"
+                },
+                {
+                    "name": "Markus Bachmann",
+                    "email": "markus.bachmann@bachi.biz"
+                },
+                {
+                    "name": "Community contributors",
+                    "homepage": "https://github.com/portphp/csv/graphs/contributors"
+                }
+            ],
+            "description": "CSV reader and writer for Port",
+            "homepage": "https://github.com/portphp",
+            "time": "2018-01-07T16:58:14+00:00"
+        },
+        {
+            "name": "portphp/doctrine",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/portphp/doctrine.git",
+                "reference": "f42b777f9afa84f924ff3ec6853e3c9cd736bd89"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/portphp/doctrine/zipball/f42b777f9afa84f924ff3ec6853e3c9cd736bd89",
+                "reference": "f42b777f9afa84f924ff3ec6853e3c9cd736bd89",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/common": "^2.2",
+                "php": ">=5.6.0",
+                "portphp/portphp": "^1.0.0"
+            },
+            "require-dev": {
+                "doctrine/mongodb": "^1.2",
+                "doctrine/mongodb-odm": "^1.0",
+                "doctrine/orm": "~2.4",
+                "ext-sqlite3": "*",
+                "phpunit/phpunit": "4.7.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Port\\Doctrine\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David de Boer",
+                    "email": "david@ddeboer.nl"
+                },
+                {
+                    "name": "Markus Bachmann",
+                    "email": "markus.bachmann@bachi.biz"
+                },
+                {
+                    "name": "Community contributors",
+                    "homepage": "https://github.com/portphp/doctrine-adapter/graphs/contributors"
+                }
+            ],
+            "description": "Doctrine ORM/ODM reader and writer for Port",
+            "homepage": "https://github.com/portphp",
+            "time": "2017-08-30T08:19:41+00:00"
+        },
+        {
+            "name": "portphp/portphp",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/portphp/portphp.git",
+                "reference": "6600804731fea8d15a30248798432bd5df02179b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/portphp/portphp/zipball/6600804731fea8d15a30248798432bd5df02179b",
+                "reference": "6600804731fea8d15a30248798432bd5df02179b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0",
+                "psr/log": "~1.0",
+                "symfony/property-access": "^2.8 || ^3.0 || ^4.0",
+                "symfony/validator": "^2.8 || ^3.0 || ^4.0"
+            },
+            "require-dev": {
+                "doctrine/instantiator": "^1.0.5",
+                "ext-iconv": "*",
+                "ext-mbstring": "*",
+                "phpspec/phpspec": "^2.4",
+                "phpunit/phpunit": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Port\\": "src/",
+                    "Port\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David de Boer",
+                    "email": "david@ddeboer.nl"
+                },
+                {
+                    "name": "Markus Bachmann",
+                    "email": "markus.bachmann@bachi.biz"
+                },
+                {
+                    "name": "Community contributors",
+                    "homepage": "https://github.com/portphp/portphp/graphs/contributors"
+                }
+            ],
+            "description": "Data import/export workflow",
+            "homepage": "https://github.com/portphp",
+            "keywords": [
+                "csv",
+                "data",
+                "doctrine",
+                "excel",
+                "export",
+                "import"
+            ],
+            "time": "2017-12-02T08:17:07+00:00"
+        },
+        {
+            "name": "portphp/steps",
+            "version": "1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/portphp/steps.git",
+                "reference": "cd87c96fbfe2b87a2af53fab974e81d454cfcb52"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/portphp/steps/zipball/cd87c96fbfe2b87a2af53fab974e81d454cfcb52",
+                "reference": "cd87c96fbfe2b87a2af53fab974e81d454cfcb52",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0",
+                "portphp/portphp": "^1.0.0",
+                "seld/signal-handler": "^1.0",
+                "symfony/property-access": "^2.3 || ^3.0 || ^4.0",
+                "symfony/validator": "^2.5 || ^3.0 || ^4.0"
+            },
+            "conflict": {
+                "symfony/validator": "<2.5"
+            },
+            "require-dev": {
+                "henrikbjorn/phpspec-code-coverage": "^1.0",
+                "phpspec/phpspec": "^2.2"
+            },
+            "suggest": {
+                "symfony/property-access": "Used in MappingStep",
+                "symfony/validator": "Used in ValidatorStep"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Port\\Steps\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David de Boer",
+                    "email": "david@ddeboer.nl"
+                },
+                {
+                    "name": "Markus Bachmann",
+                    "email": "markus.bachmann@bachi.biz"
+                },
+                {
+                    "name": "Community contributors",
+                    "homepage": "https://github.com/portphp/boilerplate/graphs/contributors"
+                }
+            ],
+            "description": "Step aggregator for Port",
+            "homepage": "https://github.com/portphp",
+            "time": "2018-05-11T06:42:47+00:00"
+        },
+        {
             "name": "psr/cache",
             "version": "1.0.1",
             "source": {
@@ -1355,6 +1602,54 @@
                 "simple-cache"
             ],
             "time": "2017-10-23T01:57:42+00:00"
+        },
+        {
+            "name": "seld/signal-handler",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Seldaek/signal-handler.git",
+                "reference": "86f791965478b33f76878139df78bc3f369f182c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Seldaek/signal-handler/zipball/86f791965478b33f76878139df78bc3f369f182c",
+                "reference": "86f791965478b33f76878139df78bc3f369f182c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8",
+                "psr/log": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Seld\\Signal\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be",
+                    "homepage": "http://seld.be"
+                }
+            ],
+            "description": "Simple unix signal handler that silently fails on windows for easy cross-platform development",
+            "keywords": [
+                "posix",
+                "sigint",
+                "signal",
+                "sigterm",
+                "unix"
+            ],
+            "time": "2016-09-14T09:32:56+00:00"
         },
         {
             "name": "sensio/distribution-bundle",
@@ -2097,16 +2392,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.4.13",
+            "version": "v3.4.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "c406c5a4f11fc00b60d3ec585125350418c4568d"
+                "reference": "f50e17fa4edd6216f7fe5b908f04e64ba1d19a9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/c406c5a4f11fc00b60d3ec585125350418c4568d",
-                "reference": "c406c5a4f11fc00b60d3ec585125350418c4568d",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/f50e17fa4edd6216f7fe5b908f04e64ba1d19a9e",
+                "reference": "f50e17fa4edd6216f7fe5b908f04e64ba1d19a9e",
                 "shasum": ""
             },
             "require": {
@@ -2248,7 +2543,74 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2018-07-23T16:37:45+00:00"
+            "time": "2018-08-01T14:48:04+00:00"
+        },
+        {
+            "name": "symfony/workflow",
+            "version": "v4.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/workflow.git",
+                "reference": "a1ab61e43175ea0bf9265515aff95f30ace4014d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/workflow/zipball/a1ab61e43175ea0bf9265515aff95f30ace4014d",
+                "reference": "a1ab61e43175ea0bf9265515aff95f30ace4014d",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3",
+                "symfony/property-access": "~3.4|~4.0"
+            },
+            "require-dev": {
+                "psr/log": "~1.0",
+                "symfony/dependency-injection": "~3.4|~4.0",
+                "symfony/event-dispatcher": "~3.4|~4.0",
+                "symfony/expression-language": "~3.4|~4.0",
+                "symfony/security-core": "~3.4|~4.0",
+                "symfony/validator": "~3.4|~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Workflow\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Grégoire Pineau",
+                    "email": "lyrixx@lyrixx.info"
+                }
+            ],
+            "description": "Symfony Workflow Component",
+            "homepage": "http://symfony.com",
+            "keywords": [
+                "petrinet",
+                "place",
+                "state",
+                "statemachine",
+                "transition",
+                "workflow"
+            ],
+            "time": "2018-07-26T09:10:45+00:00"
         },
         {
             "name": "twig/twig",
@@ -2447,8 +2809,5 @@
     "platform": {
         "php": ">=5.5.9"
     },
-    "platform-dev": [],
-    "platform-overrides": {
-        "php": "5.6"
-    }
+    "platform-dev": []
 }

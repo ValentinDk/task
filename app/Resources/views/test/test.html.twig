@@ -1,6 +1,7 @@
-{% dump(result) %}
-{% for err in errors %}
-    <pre>
-{{ err }}
-    </pre>
+
+{% for res in result %}
+{%  dump(res) %}
 {% endfor %}
+
+{{  errors }}
+

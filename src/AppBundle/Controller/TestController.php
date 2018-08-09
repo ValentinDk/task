@@ -3,7 +3,9 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use AppBundle\Service\CSVParser;
+use Port\Csv\CsvReader;
+use Port\Doctrine\DoctrineWriter;
+use Port\Steps\StepAggregator as Workflow;
 
 class TestController extends Controller
 {
@@ -11,21 +13,33 @@ class TestController extends Controller
     {
         $path = 'D:\XAMPP\htdocs\testSymfony\test\app\Resources\filesCSV\stock.csv';
 
-        $parser = new CSVParser();
-        $products = $parser->parser($path);
+        $file = new \SplFileObject($path);
+        $reader = new CsvReader($file);
+        $reader->setHeaderRowNumber(0);
 
-        $validator = $this->get('validator');
+        $nameColumn = ['productCode', 'productName', 'productDescription', 'stock', 'costInUSA', 'discontinued'];
+        $reader->setColumnHeaders($nameColumn);
 
-        $errors = [];
+        $entityManager = $this->getDoctrine()->getManager();
+        $writer = new DoctrineWriter($entityManager, 'AppBundle:Product');
 
-        foreach ($products as $product) {
-            $errors[] = $validator->validate($product);
+        $workflow = new Workflow($reader);
+        $workflow->addWriter($writer);
+        $workflow->process();
+
+        $errors = $reader->getErrors();
+
+        foreach ($errors as $error) {
+
+            echo "<pre>";
+            echo "Incorrect data for the product:";
+            echo "</pre>";
+
+            foreach ($error as $key => $val) {
+                echo "$val ";
+            }
         }
 
-        for ($i = 0; $i < count($errors); $i++) {
-            $errors[$i] = (string) $errors[$i];
-        }
-
-        return $this->render('/test/test.html.twig', ['result' => $products, 'errors' => $errors]);
+        return $this->render('/test/test.html.twig', ['result' => $reader, 'errors' => $val]);
     }
 }
