@@ -161,19 +161,19 @@ class Product
     }
 
     /**
-     * @param int $stock
+     * @param string $stock
      */
-    public function setStock(int $stock)
+    public function setStock(string $stock)
     {
-        $this->stock = $stock;
+        $this->stock = (int) $stock;
     }
 
     /**
-     * @param float $costInUSA
+     * @param string $costInUSA
      */
-    public function setCostInUSA(float $costInUSA)
+    public function setCostInUSA(string $costInUSA)
     {
-        $this->costInUSA = $costInUSA;
+        $this->costInUSA = (float) $costInUSA;
     }
 
     /**
