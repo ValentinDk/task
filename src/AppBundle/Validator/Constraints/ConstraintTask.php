@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class ConstraintTask extends Constraint
 {
-    public $massage = "Error";
+    public $message = 'Товар стоит менее 5$ и его колличество менее 10';
 
     public function getTargets()
     {

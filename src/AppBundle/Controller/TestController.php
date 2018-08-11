@@ -2,44 +2,32 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Import\ImportCsv;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Port\Csv\CsvReader;
-use Port\Doctrine\DoctrineWriter;
-use Port\Steps\StepAggregator as Workflow;
+use AppBundle\CsvReader\Reader;
+
 
 class TestController extends Controller
 {
+    private $importCsv;
+
+    public function __construct(ImportCsv $importCsv)
+    {
+        $this->importCsv = $importCsv;
+    }
+
     public function indexAction()
     {
         $path = 'D:\XAMPP\htdocs\testSymfony\test\app\Resources\filesCSV\stock.csv';
 
-        $file = new \SplFileObject($path);
-        $reader = new CsvReader($file);
-        $reader->setHeaderRowNumber(0);
+        $reader = new Reader();
+        $products = $reader->getProducts($path);
+        $import = $this->importCsv;
 
-        $nameColumn = ['productCode', 'productName', 'productDescription', 'stock', 'costInUSA', 'discontinued'];
-        $reader->setColumnHeaders($nameColumn);
+        $arrayProducts = $import->getArrayProducts($products);
 
-        $entityManager = $this->getDoctrine()->getManager();
-        $writer = new DoctrineWriter($entityManager, 'AppBundle:Product');
+        $import->importProducts($arrayProducts);
 
-        $workflow = new Workflow($reader);
-        $workflow->addWriter($writer);
-        $workflow->process();
-
-        $errors = $reader->getErrors();
-
-        foreach ($errors as $error) {
-
-            echo "<pre>";
-            echo "Incorrect data for the product:";
-            echo "</pre>";
-
-            foreach ($error as $key => $val) {
-                echo "$val ";
-            }
-        }
-
-        return $this->render('/test/test.html.twig', ['result' => $reader, 'errors' => $val]);
+        return $this->render('/test/test.html.twig');
     }
 }

@@ -21,6 +21,7 @@ class Product
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
     /**
      * @ORM\Column(type="string", unique=true, name="strProductCode")
      * @Assert\NotBlank(message="Incorrect data")
@@ -168,7 +169,7 @@ class Product
     /**
      * @param string $stock
      */
-    public function setStock(string $stock)
+    public function setStock($stock)
     {
         $this->stock = (int) $stock;
     }
@@ -176,7 +177,7 @@ class Product
     /**
      * @param string $costInUSA
      */
-    public function setCostInUSA(string $costInUSA)
+    public function setCostInUSA($costInUSA)
     {
         $this->costInUSA = (float) $costInUSA;
     }
@@ -184,8 +185,22 @@ class Product
     /**
      * @param string $discontinued
      */
-    public function setDiscontinued(string $discontinued)
+    public function setDiscontinued($discontinued)
     {
         $this->discontinued = $discontinued === "yes" ? new \DateTime() : null;
+    }
+
+    /**
+     * @param array $product
+     * @return Product
+     */
+    public function createFromArray(array $product):Product
+    {
+        foreach ($product as $key => $value) {
+            $methodName = "set".ucfirst("$key");
+            $this->$methodName($value);
+        }
+
+        return $this;
     }
 }
