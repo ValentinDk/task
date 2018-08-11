@@ -3,63 +3,68 @@
 namespace AppBundle\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Validator\Constraints as TaskAssert;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="Products")
+ * @ORM\Table(name="tblproductdata")
+ * @UniqueEntity("productCode")
+ * @TaskAssert\ConstraintTask
  */
 class Product
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", name="intProductDataId")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
     /**
-     * @ORM\Column(type="string", unique=true)
+     * @ORM\Column(type="string", unique=true, name="strProductCode")
      * @Assert\NotBlank(message="Incorrect data")
      */
     private $productCode;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", name="strProductName")
      * @Assert\NotBlank(message="Incorrect data")
      */
     private $productName;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", name="strProductDesc")
      * @Assert\NotBlank(message="Incorrect data")
      */
     private $productDescription;
 
     /**
-     * @ORM\Column(name="Added", type="datetime", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+     * @ORM\Column(name="Added", type="datetime", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", name="dtmAdded")
      * @ORM\Version
      */
     private $added;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", name="stock")
      * @Assert\Type(type="integer", message="Incorrect data")
      */
     private $stock;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", name="cost")
      * @Assert\Type(type="float", message="Incorrect data")
+     * @Assert\LessThan(1000)
      */
     private $costInUSA;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true, name="dtmDiscontinued")
      */
     private $discontinued;
 
     /**
-     * @ORM\Column(type="datetime", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+     * @ORM\Column(type="datetime", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", name="stmTimestamp")
      * @ORM\Version
      */
     private $timestamp;
@@ -181,10 +186,6 @@ class Product
      */
     public function setDiscontinued(string $discontinued)
     {
-        if($discontinued === "yes") {
-            $this->discontinued = date('Y-m-d H:i');
-        } else {
-            $this->discontinued = null;
-        }
+        $this->discontinued = $discontinued === "yes" ? new \DateTime() : null;
     }
 }
