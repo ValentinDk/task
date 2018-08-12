@@ -15,6 +15,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class Product
 {
+    const PRODUCT = "Unsuccessful product: %s, %s, %s, %s, %s, %s";
     /**
      * @ORM\Id
      * @ORM\Column(type="integer", name="intProductDataId")
@@ -69,6 +70,11 @@ class Product
      * @ORM\Version
      */
     private $timestamp;
+
+    public function __toString()
+    {
+        return sprintf(self::PRODUCT, $this->getProductCode(), $this->getProductName(), $this->getProductDescription(), $this->getStock(), $this->getCostInUSA(), $this->getDiscontinued());
+    }
 
     /**
      * @return int
@@ -127,11 +133,13 @@ class Product
     }
 
     /**
-     * @return \DateTime
+     * @return null|string
      */
-    public function getDiscontinued():\DateTime
+    public function getDiscontinued():?string
     {
-        return $this->discontinued;
+        $date = $this->discontinued ? $this->discontinued->format('Y-m-d') : null;
+
+        return $date;
     }
 
     /**
@@ -188,6 +196,7 @@ class Product
     public function setDiscontinued($discontinued)
     {
         $this->discontinued = $discontinued === "yes" ? new \DateTime() : null;
+
     }
 
     /**

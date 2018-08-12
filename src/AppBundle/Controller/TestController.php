@@ -20,14 +20,13 @@ class TestController extends Controller
     {
         $path = 'D:\XAMPP\htdocs\testSymfony\test\app\Resources\filesCSV\stock.csv';
 
-        $reader = new Reader();
-        $products = $reader->getProducts($path);
-        $import = $this->importCsv;
+        $this->importCsv->importProducts($path);
 
-        $arrayProducts = $import->getArrayProducts($products);
+        $success = $this->importCsv->getQuantitySuccessful();
+        $fails = $this->importCsv->getQuantityFails();
+        $total = $this->importCsv->getTotalProducts();
+        $failsProducts = $this->importCsv->getFailsProducts();
 
-        $import->importProducts($arrayProducts);
-
-        return $this->render('/test/test.html.twig');
+        return $this->render('/test/test.html.twig', ['total' => $total, 'success' => $success, 'fails' => $fails, 'failsProducts' => $failsProducts]);
     }
 }

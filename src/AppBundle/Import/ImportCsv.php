@@ -4,6 +4,7 @@ namespace AppBundle\Import;
 
 use AppBundle\Entity\Product;
 use Port\Csv\CsvReader;
+use AppBundle\CsvReader\Reader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -11,6 +12,10 @@ class ImportCsv
 {
     private $entityManager;
     private $validator;
+    private $successArray = [];
+    private $failsProducts = [];
+    private $arrayProducts = [];
+    private $errorsArray = [];
 
     public function __construct(EntityManagerInterface $entityManager, ValidatorInterface $validator)
     {
@@ -19,40 +24,69 @@ class ImportCsv
     }
 
     /**
-     * @param CsvReader $reader
-     * @return array
+     * @param CsvReader $products
      */
-    public function getArrayProducts(CsvReader $reader):array
+    private function createObjectProduct(CsvReader $products)
     {
-        $arrayProducts = [];
-
-        foreach ($reader as $row) {
-            $product = new Product();
-            $product->createFromArray($row);
-            $arrayProducts[] = $product;
+        foreach ($products as $row) {
+                $product = new Product();
+                $product->createFromArray($row);
+                $this->arrayProducts[] = $product;
         }
-
-        return $arrayProducts;
     }
 
-    public function importProducts($arrayProducts)
+    /**
+     * @param string $path
+     */
+    public function importProducts(string $path)
     {
-        $errorsArray = [];
-        $failsArray = [];
-        $totalSuccess = 0;
-        $totalFails = 0;
-        foreach ($arrayProducts as $product) {
+        $reader = new Reader();
+        $products = $reader->getProducts($path);
+        $this->createObjectProduct($products);
+
+        foreach ($this->arrayProducts as $product) {
             $errors = $this->validator->validate($product);
 
             if (count($errors) === 0) {
-                $totalSuccess++;
+                $this->successArray[] = $product;
                 $this->entityManager->persist($product);
                 $this->entityManager->flush();
             } else {
-                $totalFails++;
-                $failsArray[] = $product;
-                $errorsArray[] = $errors;
+                $this->failsProducts[] = $product;
+                $this->errorsArray[] = $errors;
             }
         }
+    }
+
+    /**
+     * @return int
+     */
+    public function getQuantitySuccessful()
+    {
+        return count($this->successArray);
+    }
+
+    /**
+     * @return int
+     */
+    public function getQuantityFails()
+    {
+        return count($this->failsProducts);
+    }
+
+    /**
+     * @return int
+     */
+    public function getTotalProducts()
+    {
+        return count($this->arrayProducts);
+    }
+
+    /**
+     * @return array
+     */
+    public function getFailsProducts()
+    {
+        return $this->failsProducts;
     }
 }
