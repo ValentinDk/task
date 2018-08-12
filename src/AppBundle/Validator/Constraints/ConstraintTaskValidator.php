@@ -7,9 +7,16 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class ConstraintTaskValidator extends  ConstraintValidator
 {
-    public function validate($object, Constraint $constraint)
+    const COST = 5;
+    const STOCK = 10;
+
+    /**
+     * @param mixed $object
+     * @param Constraint $constraint
+     */
+    public function validate($object, Constraint $constraint):void
     {
-        if (($object->getCostInUSA() < 5) && ($object->getStock() < 10)) {
+        if (($object->getCostInUSA() < self::COST) && ($object->getStock() < self::STOCK)) {
             $this->context->buildViolation($constraint->message)->addViolation();
         }
     }

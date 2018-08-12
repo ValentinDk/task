@@ -26,7 +26,7 @@ class ImportCsv
     /**
      * @param CsvReader $products
      */
-    private function createObjectProduct(CsvReader $products)
+    private function createObjectProduct(CsvReader $products):void
     {
         foreach ($products as $row) {
                 $product = new Product();
@@ -38,7 +38,7 @@ class ImportCsv
     /**
      * @param string $path
      */
-    public function importProducts(string $path)
+    public function importProducts(string $path):void
     {
         $reader = new Reader();
         $products = $reader->getProducts($path);

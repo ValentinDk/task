@@ -11,6 +11,9 @@ class ConstraintTask extends Constraint
 {
     public $message = 'Товар стоит менее 5$ и его колличество менее 10';
 
+    /**
+     * @return array|string
+     */
     public function getTargets()
     {
         return self::CLASS_CONSTRAINT;

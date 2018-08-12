@@ -16,6 +16,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Product
 {
     const PRODUCT = "Unsuccessful product: %s, %s, %s, %s, %s, %s";
+    const FORMAT = "Y-m-d";
+    const PREFIX = "set%s";
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer", name="intProductDataId")
@@ -71,9 +74,20 @@ class Product
      */
     private $timestamp;
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
-        return sprintf(self::PRODUCT, $this->getProductCode(), $this->getProductName(), $this->getProductDescription(), $this->getStock(), $this->getCostInUSA(), $this->getDiscontinued());
+        return sprintf(
+            self::PRODUCT,
+            $this->getProductCode(),
+            $this->getProductName(),
+            $this->getProductDescription(),
+            $this->getStock(),
+            $this->getCostInUSA(),
+            $this->getDiscontinued()
+        );
     }
 
     /**
@@ -137,7 +151,7 @@ class Product
      */
     public function getDiscontinued():?string
     {
-        $date = $this->discontinued ? $this->discontinued->format('Y-m-d') : null;
+        $date = $this->discontinued ? $this->discontinued->format(self::FORMAT) : null;
 
         return $date;
     }
@@ -153,7 +167,7 @@ class Product
     /**
      * @param string $productCode
      */
-    public function setProductCode(string $productCode)
+    public function setProductCode(string $productCode):void
     {
         $this->productCode = $productCode;
     }
@@ -161,7 +175,7 @@ class Product
     /**
      * @param string $productName
      */
-    public function setProductName(string $productName)
+    public function setProductName(string $productName):void
     {
         $this->productName = $productName;
     }
@@ -169,7 +183,7 @@ class Product
     /**
      * @param string $productDescription
      */
-    public function setProductDescription(string $productDescription)
+    public function setProductDescription(string $productDescription):void
     {
         $this->productDescription = $productDescription;
     }
@@ -177,7 +191,7 @@ class Product
     /**
      * @param string $stock
      */
-    public function setStock($stock)
+    public function setStock($stock):void
     {
         $this->stock = (int) $stock;
     }
@@ -185,18 +199,17 @@ class Product
     /**
      * @param string $costInUSA
      */
-    public function setCostInUSA($costInUSA)
+    public function setCostInUSA($costInUSA):void
     {
         $this->costInUSA = (float) $costInUSA;
     }
 
     /**
-     * @param string $discontinued
+     * @param string|null $discontinued
      */
-    public function setDiscontinued($discontinued)
+    public function setDiscontinued(string $discontinued = null):void
     {
         $this->discontinued = $discontinued === "yes" ? new \DateTime() : null;
-
     }
 
     /**
@@ -206,7 +219,7 @@ class Product
     public function createFromArray(array $product):Product
     {
         foreach ($product as $key => $value) {
-            $methodName = "set".ucfirst("$key");
+            $methodName = sprintf(self::PREFIX, ucfirst("$key"));
             $this->$methodName($value);
         }
 

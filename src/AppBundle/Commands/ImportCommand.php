@@ -22,6 +22,7 @@ class ImportCommand extends Command
 
         parent::__construct();
     }
+
     protected function configure()
     {
         $this
