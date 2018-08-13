@@ -13,6 +13,7 @@ class ImportCommand extends Command
     const TOTAL = "Total processed: %d";
     const SUCCESS = "Successfully: %d";
     const FAILS = "Unsuccessfully: %d";
+    const PRODUCT = "Unsuccessful product: %s";
 
     private $importCsv;
 
@@ -43,6 +44,6 @@ class ImportCommand extends Command
         $output->writeln(sprintf(self::TOTAL, $total));
         $output->writeln(sprintf(self::SUCCESS, $success));
         $output->writeln(sprintf(self::FAILS, $fails));
-        $output->writeln($failsProducts);
+        $output->writeln(sprintf(self::PRODUCT, $failsProducts));
     }
 }

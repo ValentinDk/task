@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class ConstraintTask extends Constraint
 {
-    public $message = 'Товар стоит менее 5$ и его колличество менее 10';
+    public $message = 'The product costs less than $ 5 and its quantity is less than 10';
 
     /**
      * @return array|string

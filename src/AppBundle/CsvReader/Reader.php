@@ -6,6 +6,8 @@ use Port\Csv\CsvReader;
 
 class Reader
 {
+    const COLUMN = ['productCode', 'productName', 'productDescription', 'stock', 'costInUSA', 'discontinued'];
+
     /**
      * @param string $path
      * @return CsvReader
@@ -17,9 +19,7 @@ class Reader
 
         $reader->setStrict(false);
         $reader->setHeaderRowNumber(0);
-
-        $nameColumn = ['productCode', 'productName', 'productDescription', 'stock', 'costInUSA', 'discontinued'];
-        $reader->setColumnHeaders($nameColumn);
+        $reader->setColumnHeaders(self::COLUMN);
 
         return $reader;
     }

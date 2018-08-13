@@ -29,9 +29,9 @@ class ImportCsv
     private function createObjectProduct(CsvReader $products):void
     {
         foreach ($products as $row) {
-                $product = new Product();
-                $product->createFromArray($row);
-                $this->arrayProducts[] = $product;
+            $product = new Product();
+            $product->createFromArray($row);
+            $this->arrayProducts[] = $product;
         }
     }
 

@@ -15,7 +15,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class Product
 {
-    const PRODUCT = "Unsuccessful product: %s, %s, %s, %s, %s, %s";
+    const PRODUCT = "%s, %s, %s, %s, %s, %s";
     const FORMAT = "Y-m-d";
     const PREFIX = "set%s";
 
