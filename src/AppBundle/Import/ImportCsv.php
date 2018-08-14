@@ -16,11 +16,13 @@ class ImportCsv
     private $failsProducts = [];
     private $arrayProducts = [];
     private $errorsArray = [];
+    private $reader;
 
-    public function __construct(EntityManagerInterface $entityManager, ValidatorInterface $validator)
+    public function __construct(EntityManagerInterface $entityManager, ValidatorInterface $validator, Reader $reader)
     {
         $this->entityManager = $entityManager;
         $this->validator = $validator;
+        $this->reader = $reader;
     }
 
     /**
@@ -36,27 +38,42 @@ class ImportCsv
     }
 
     /**
+     * @param Product $product
+     */
+    private function saveProduct(Product $product):void
+    {
+        $this->entityManager->persist($product);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @return bool
+     */
+    private function isValid(Product $product):bool
+    {
+        $errors = $this->validator->validate($product);
+
+        if (count($errors) === 0) {
+            $this->successArray[] = $product;
+            return true;
+        } else {
+            $this->failsProducts[] = $product;
+            $this->errorsArray[] = $errors;
+            return false;
+        }
+    }
+
+    /**
      * @param string $path
      */
     public function importProducts(string $path, bool $test):void
     {
-        $reader = new Reader();
-        $products = $reader->getProducts($path);
+        $products = $this->reader->getProducts($path);
         $this->createObjectProduct($products);
 
         foreach ($this->arrayProducts as $product) {
-            $errors = $this->validator->validate($product);
-
-            if (count($errors) === 0) {
-                $this->successArray[] = $product;
-
-                if (!$test) {
-                    $this->entityManager->persist($product);
-                    $this->entityManager->flush();
-                }
-            } else {
-                $this->failsProducts[] = $product;
-                $this->errorsArray[] = $errors;
+            if ($this->isValid($product) && !$test) {
+                $this->saveProduct($product);
             }
         }
     }
