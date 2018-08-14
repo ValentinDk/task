@@ -27,14 +27,16 @@ class ImportCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('test:test')
-            ->addArgument('csv', InputArgument::REQUIRED);
+            ->setName('import:csv')
+            ->addArgument('csv', InputArgument::REQUIRED)
+            ->addOption('test');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $path = $input->getArgument('csv');
-        $this->importCsv->importProducts($path);
+        $test = $input->getOption('test');
+        $this->importCsv->importProducts($path, $test);
 
         $success = $this->importCsv->getQuantitySuccessful();
         $fails = $this->importCsv->getQuantityFails();
@@ -44,6 +46,9 @@ class ImportCommand extends Command
         $output->writeln(sprintf(self::TOTAL, $total));
         $output->writeln(sprintf(self::SUCCESS, $success));
         $output->writeln(sprintf(self::FAILS, $fails));
-        $output->writeln(sprintf(self::PRODUCT, $failsProducts));
+
+        foreach ($failsProducts as $product) {
+            $output->writeln(sprintf(self::PRODUCT, $product));
+        }
     }
 }

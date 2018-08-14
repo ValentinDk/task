@@ -38,7 +38,7 @@ class ImportCsv
     /**
      * @param string $path
      */
-    public function importProducts(string $path):void
+    public function importProducts(string $path, bool $test):void
     {
         $reader = new Reader();
         $products = $reader->getProducts($path);
@@ -49,8 +49,11 @@ class ImportCsv
 
             if (count($errors) === 0) {
                 $this->successArray[] = $product;
-                $this->entityManager->persist($product);
-                $this->entityManager->flush();
+
+                if (!$test) {
+                    $this->entityManager->persist($product);
+                    $this->entityManager->flush();
+                }
             } else {
                 $this->failsProducts[] = $product;
                 $this->errorsArray[] = $errors;
