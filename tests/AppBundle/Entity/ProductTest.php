@@ -14,6 +14,11 @@ class ProductTest extends TestCase
         $this->product = new Product();
     }
 
+    protected function tearDown()
+    {
+        $this->product = null;
+    }
+
     /**
      * @dataProvider getProvider
      */
