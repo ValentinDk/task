@@ -1,1 +1,1 @@
-C:30:"PHPUnit\Runner\TestResultCache":319:{a:2:{s:7:"defects";a:0:{}s:5:"times";a:6:{s:36:"testGetDiscontinued with data set #0";d:0.003;s:36:"testGetDiscontinued with data set #1";d:0;s:36:"testSetDiscontinued with data set #0";d:0;s:36:"testSetDiscontinued with data set #1";d:0;s:36:"testSetDiscontinued with data set #2";d:0;s:19:"testCreateFromArray";d:0;}}}
+C:30:"PHPUnit\Runner\TestResultCache":77:{a:2:{s:7:"defects";a:0:{}s:5:"times";a:1:{s:17:"testImportProduct";d:0.064;}}}

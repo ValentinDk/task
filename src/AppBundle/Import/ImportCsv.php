@@ -12,7 +12,7 @@ class ImportCsv
 {
     private $entityManager;
     private $validator;
-    private $successArray = [];
+    private $successProducts = [];
     private $failsProducts = [];
     private $arrayProducts = [];
     private $errorsArray = [];
@@ -47,6 +47,7 @@ class ImportCsv
     }
 
     /**
+     * @param Product $product
      * @return bool
      */
     private function isValid(Product $product):bool
@@ -54,7 +55,7 @@ class ImportCsv
         $errors = $this->validator->validate($product);
 
         if (count($errors) === 0) {
-            $this->successArray[] = $product;
+            $this->successProducts[] = $product;
             return true;
         } else {
             $this->failsProducts[] = $product;
@@ -65,6 +66,7 @@ class ImportCsv
 
     /**
      * @param string $path
+     * @param bool $test
      */
     public function importProducts(string $path, bool $test):void
     {
@@ -83,7 +85,7 @@ class ImportCsv
      */
     public function getQuantitySuccessful()
     {
-        return count($this->successArray);
+        return count($this->successProducts);
     }
 
     /**

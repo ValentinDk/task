@@ -1,0 +1,6 @@
+Product Code,Product Name,Product Description,Stock,Cost in USA,Discontinued
+,Test,10,399.99,
+P0002,,Test,11,50.12,yes
+P0003,Test,,12,39.33,yes
+P0004,Test,Test,1,24.55,
+P0005,Test,Test,5,30.44,
