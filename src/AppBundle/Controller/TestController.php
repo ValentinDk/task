@@ -13,7 +13,7 @@ class TestController extends Controller
 
     public function __construct(ImportCsv $importCsv)
     {
-        $this->importCsv = $importCsv;
+        $this->importCsv = $importCsv;//пёс
     }
 
     public function indexAction()
